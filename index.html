@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calendario de Adviento para Liss 💜</title>
+    <title>🧪 PRUEBA - Calendario de Adviento para Liss 💜</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       @keyframes fadeIn {
@@ -31,6 +31,9 @@
     <div class="p-4 md:p-8">
       <!-- Header -->
       <div class="text-center mb-8">
+        <div class="bg-yellow-500 text-black px-4 py-2 rounded-lg mb-4 inline-block font-bold">
+          🧪 VERSIÓN DE PRUEBA - Todos los días desbloqueados
+        </div>
         <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">
           🎄 Calendario de Adviento 🎄
         </h1>
@@ -49,6 +52,7 @@
       <div class="text-center text-purple-200 mt-8">
         <p class="text-sm">Tu Chocoflan</p>
         <p class="text-xs mt-2">Espero que te guste!🐰</p>
+        <p class="text-xs mt-4 text-yellow-300">⚠️ Esta es la versión de PRUEBA. Usa index.html para publicar.</p>
       </div>
     </div>
 
@@ -72,8 +76,6 @@
 
     <script>
       // ⭐ CONFIGURACIÓN DE REGALOS ⭐
-      // Para las imágenes: coloca tus fotos en la carpeta 'assets' con estos nombres exactos
-      // Para los libros: agrega el link de Google Drive u otro servicio
       const gifts = [
         {
           day: 1,
@@ -86,7 +88,7 @@
           day: 2,
           type: "song",
           content: "Still With You - Jungkook",
-          link: "https://youtu.be/G-V7LbEzsjE?si=Xg6UnNf2tvD_Irr2", // ⬅️ CAMBIA ESTE ENLACE
+          link: "https://youtu.be/G-V7LbEzsjE?si=Xg6UnNf2tvD_Irr2",
           color: "bg-blue-600",
           icon: "🎵",
         },
@@ -104,7 +106,7 @@
           type: "book",
           content:
             '"Demian" de Hermann Hesse - Recomendado por Namu. Que disfrutes esta lectura! 🦋',
-          link: "https://drive.google.com/file/d/1cOSqRvcGJ6HBf6v7yRH40aJM3MupNt8Z/view?usp=sharing", // ⬅️ ENLACE DEL LIBRO
+          link: "https://drive.google.com/file/d/1cOSqRvcGJ6HBf6v7yRH40aJM3MupNt8Z/view?usp=sharing",
           color: "bg-rose-700",
           icon: "📚",
         },
@@ -120,7 +122,7 @@
           day: 6,
           type: "song",
           content: "At my worst - Cover by Jk",
-          link: "https://www.youtube.com/live/iDm9AF1h-78?si=_DTsuCNQoIxQBelw", // ⬅️ CAMBIA ESTE ENLACE
+          link: "https://www.youtube.com/live/iDm9AF1h-78?si=_DTsuCNQoIxQBelw",
           color: "bg-blue-600",
           icon: "🎵",
         },
@@ -128,7 +130,7 @@
           day: 7,
           type: "photo",
           content: "Porque juntas somos el Yoonkook! 🐱💜🐰",
-          imageUrl: "assets/yoonkook1.jpg", // ⬅️ PON AQUÍ TU FOTO
+          imageUrl: "assets/yoonkook1.jpg",
           color: "bg-indigo-700",
           icon: "✨",
         },
@@ -152,7 +154,7 @@
           day: 10,
           type: "song",
           content: "Only Then - Cover by Jk",
-          link: "https://youtu.be/1ktLaRLs4hs?si=7OQXFyIkoCULX7Kx", // ⬅️ CAMBIA ESTE ENLACE
+          link: "https://youtu.be/1ktLaRLs4hs?si=7OQXFyIkoCULX7Kx",
           color: "bg-blue-600",
           icon: "🎵",
         },
@@ -161,7 +163,7 @@
           type: "book",
           content:
             '"La Metamorfosis" de Franz Kafka - Sobre cambios y la identidad ',
-          link: "https://drive.google.com/file/d/1ByEIymc_MYek34vlkj3PPONLKHTuaAGJ/view?usp=sharing", // ⬅️ ENLACE DEL LIBRO (opcional)
+          link: "https://drive.google.com/file/d/1ByEIymc_MYek34vlkj3PPONLKHTuaAGJ/view?usp=sharing",
           color: "bg-rose-700",
           icon: "📚",
         },
@@ -172,7 +174,7 @@
             "Color del día: Blanco puro - Representa la paz, la pureza y nuevos comienzos ☁️: Siempre es válido volver a empezar",
           hex: "#FFFFFF",
           color: "bg-slate-200",
-          textColor: "text-black", // ⬅️ AGREGA ESTA LÍNEA
+          textColor: "text-black",
           icon: "🎨",
         },
         {
@@ -187,7 +189,7 @@
           day: 14,
           type: "song",
           content: "everythingoes - RM",
-          link: "https://youtu.be/arXPrBQxOao?si=SUZ2UXuvud31XgNT", // ⬅️ CAMBIA ESTE ENLACE
+          link: "https://youtu.be/arXPrBQxOao?si=SUZ2UXuvud31XgNT",
           color: "bg-blue-600",
           icon: "🎵",
         },
@@ -195,7 +197,7 @@
           day: 15,
           type: "photo",
           content: "Otro YoonKook por aquí! 💜✨",
-          imageUrl: "assets/yoonkook2.jpg", // ⬅️ PON AQUÍ TU FOTO
+          imageUrl: "assets/yoonkook2.jpg",
           color: "bg-purple-700",
           icon: "✨",
         },
@@ -220,7 +222,7 @@
           day: 18,
           type: "song",
           content: "Tokyo - RM",
-          link: "https://youtu.be/rT8dU6f4o5o?si=ban4sl0N0s2grljf", // ⬅️ CAMBIA ESTE ENLACE
+          link: "https://youtu.be/rT8dU6f4o5o?si=ban4sl0N0s2grljf",
           color: "bg-blue-600",
           icon: "🎵",
         },
@@ -229,7 +231,7 @@
           type: "book",
           content:
             '"El Extranjero" de Albert Camus - Recomendado por Namu. Sobre la existencia y encontrar significado, que la disfrutes!! 🌊',
-          link: "https://drive.google.com/file/d/19v1Ri5tqrIvnm-H5Sy-LhO0lJgN5XO7Q/view?usp=sharing", // ⬅️ ENLACE DEL LIBRO (opcional)
+          link: "https://drive.google.com/file/d/19v1Ri5tqrIvnm-H5Sy-LhO0lJgN5XO7Q/view?usp=sharing",
           color: "bg-rose-700",
           icon: "📚",
         },
@@ -245,7 +247,7 @@
           day: 21,
           type: "song",
           content: "Una Playlist para ti - Ten un buen día! ",
-          link: "https://youtu.be/i0DCGOx13iM?si=6afGyZu-yzjUMYFv", // ⬅️ CAMBIA ESTE ENLACE
+          link: "https://youtu.be/i0DCGOx13iM?si=6afGyZu-yzjUMYFv",
           color: "bg-blue-600",
           icon: "🎵",
         },
@@ -254,7 +256,7 @@
           type: "photo",
           content:
             "¡Koo Bonito! Ponte feliz, Koo, Namu y yo te queremos mucho ⭐🐰",
-          imageUrl: "assets/jungkook1.jpg", // ⬅️ PON AQUÍ TU FOTO
+          imageUrl: "assets/jungkook1.jpg",
           color: "bg-cyan-600",
           icon: "✨",
         },
@@ -270,7 +272,7 @@
           day: 24,
           type: "song",
           content: "If You - Cover by Jk",
-          link: "https://youtu.be/_hzc0RVGQyQ?si=wjTytMg2GK80LwDl", // ⬅️ CAMBIA ESTE ENLACE
+          link: "https://youtu.be/_hzc0RVGQyQ?si=wjTytMg2GK80LwDl",
           color: "bg-blue-600",
           icon: "🎵",
         },
@@ -288,7 +290,7 @@
 
       // Cargar regalos abiertos
       function loadOpenedGifts() {
-        const saved = localStorage.getItem("adventCalendar_liss");
+        const saved = localStorage.getItem("adventCalendar_liss_test");
         if (saved) {
           openedGifts = JSON.parse(saved);
         }
@@ -297,7 +299,7 @@
       // Guardar regalos abiertos
       function saveOpenedGifts() {
         localStorage.setItem(
-          "adventCalendar_liss",
+          "adventCalendar_liss_test",
           JSON.stringify(openedGifts)
         );
       }
@@ -335,15 +337,10 @@
         });
       }
 
-      // Abrir regalo
+      // Abrir regalo - VERSION DE PRUEBA: TODOS LOS DIAS DESBLOQUEADOS
       function openGift(day) {
-        const today = new Date().getDate();
-        const currentMonth = new Date().getMonth();
-
-        if (currentMonth !== 11 || day > today) {
-          alert("¡Este regalo aún no está disponible! 🎁");
-          return;
-        }
+        // ⚠️ EN LA VERSIÓN DE PRUEBA NO HAY RESTRICCIONES
+        // En el archivo index.html, esta función verifica la fecha
 
         if (!openedGifts.includes(day)) {
           openedGifts.push(day);
@@ -362,6 +359,7 @@
 
         const textColorClass = gift.textColor || "text-white";
         modalContainer.className = `modal-content ${gift.color} rounded-3xl shadow-2xl max-w-md w-full p-8 ${textColorClass} relative`;
+        
         let content = `
                 <div class="mb-4 text-6xl animate-bounce">${gift.icon}</div>
                 <h2 class="text-3xl font-bold mb-4">Día ${gift.day}</h2>
@@ -399,7 +397,10 @@
                         <img src="${gift.imageUrl}" alt="Regalo especial" 
                              class="rounded-2xl shadow-2xl max-h-80 mx-auto object-cover border-4 border-white"
                              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <div style="display:none" class="text-4xl">🎁💜</div>
+                        <div style="display:none" class="text-4xl">
+                            🎁💜<br>
+                            <span class="text-sm">La imagen no se encontró en: ${gift.imageUrl}</span>
+                        </div>
                     </div>
                 `;
         }
