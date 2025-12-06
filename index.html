@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendario de Adviento para Liss 💜</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+      .modal-content {
+        animation: fadeIn 0.3s ease-in;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen"
+  >
+    <div class="p-4 md:p-8">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">
+          🎄 Calendario de Adviento 🎄
+        </h1>
+        <p class="text-xl text-purple-200 mb-1">Para Liss 💜</p>
+        <p class="text-sm text-purple-300">Tenía que hacerlo por la ciencia!</p>
+        <p class="text-xs text-purple-400 mt-2">-Gaby</p>
+      </div>
+
+      <!-- Calendar Grid -->
+      <div
+        id="calendar"
+        class="max-w-6xl mx-auto grid grid-cols-5 gap-3 md:gap-4 mb-8"
+      ></div>
+
+      <!-- Footer -->
+      <div class="text-center text-purple-200 mt-8">
+        <p class="text-sm">Tu Chocoflan</p>
+        <p class="text-xs mt-2">Espero que te guste!🐰</p>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      id="modal"
+      class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50"
+    >
+      <div
+        class="modal-content rounded-3xl shadow-2xl max-w-md w-full p-8 text-white relative"
+      >
+        <button
+          onclick="closeModal()"
+          class="absolute top-4 right-4 text-white hover:text-gray-200 text-2xl font-bold"
+        >
+          ×
+        </button>
+        <div class="text-center" id="modalContent"></div>
+      </div>
+    </div>
+
+    <script>
+      // ⭐ CONFIGURACIÓN DE REGALOS ⭐
+      // Para las imágenes: coloca tus fotos en la carpeta 'assets' con estos nombres exactos
+      // Para los libros: agrega el link de Google Drive u otro servicio
+      const gifts = [
+        {
+          day: 1,
+          type: "quote",
+          content: '"La vida es un cuadro y tú tienes el pincel" - RM',
+          color: "bg-purple-600",
+          icon: "💜",
+        },
+        {
+          day: 2,
+          type: "song",
+          content: "Still With You - Jungkook",
+          link: "https://youtu.be/G-V7LbEzsjE?si=Xg6UnNf2tvD_Irr2", // ⬅️ CAMBIA ESTE ENLACE
+          color: "bg-blue-600",
+          icon: "🎵",
+        },
+        {
+          day: 3,
+          type: "color",
+          content:
+            "Color del día: Azul medianoche - Representa la calma, la profundidad y los sueños nocturnos 🌙: Que hoy tengas dulces sueños!",
+          hex: "#191970",
+          color: "bg-indigo-600",
+          icon: "🎨",
+        },
+        {
+          day: 4,
+          type: "book",
+          content:
+            '"Demian" de Hermann Hesse - Recomendado por Namu. Que disfrutes esta lectura! 🦋',
+          link: "https://drive.google.com/file/d/1cOSqRvcGJ6HBf6v7yRH40aJM3MupNt8Z/view?usp=sharing", // ⬅️ ENLACE DEL LIBRO
+          color: "bg-rose-700",
+          icon: "📚",
+        },
+        {
+          day: 5,
+          type: "quote",
+          content:
+            '"Incluso si no puedes ser el número uno, está bien. Tú eres tú y eso es lo que te hace especial" - Jungkook',
+          color: "bg-purple-600",
+          icon: "💜",
+        },
+        {
+          day: 6,
+          type: "song",
+          content: "At my worst - Cover by Jk",
+          link: "https://www.youtube.com/live/iDm9AF1h-78?si=_DTsuCNQoIxQBelw", // ⬅️ CAMBIA ESTE ENLACE
+          color: "bg-blue-600",
+          icon: "🎵",
+        },
+        {
+          day: 7,
+          type: "photo",
+          content: "Porque juntas somos el Yoonkook! 🐱💜🐰",
+          imageUrl: "assets/yoonkook1.jpg", // ⬅️ PON AQUÍ TU FOTO
+          color: "bg-indigo-700",
+          icon: "✨",
+        },
+        {
+          day: 8,
+          type: "color",
+          content:
+            "Color del día: Negro elegante - Simboliza el misterio, la sofisticación y la fuerza interior 🖤: Porque la oscuridad no tiene que representar algo malo, no?",
+          hex: "#000000",
+          color: "bg-gray-900",
+          icon: "🎨",
+        },
+        {
+          day: 9,
+          type: "quote",
+          content: '"Vive la vida con pasión" - Hobi',
+          color: "bg-purple-600",
+          icon: "💜",
+        },
+        {
+          day: 10,
+          type: "song",
+          content: "Only Then - Cover by Jk",
+          link: "https://youtu.be/1ktLaRLs4hs?si=7OQXFyIkoCULX7Kx", // ⬅️ CAMBIA ESTE ENLACE
+          color: "bg-blue-600",
+          icon: "🎵",
+        },
+        {
+          day: 11,
+          type: "book",
+          content:
+            '"La Metamorfosis" de Franz Kafka - Sobre cambios y la identidad ',
+          link: "https://drive.google.com/file/d/1ByEIymc_MYek34vlkj3PPONLKHTuaAGJ/view?usp=sharing", // ⬅️ ENLACE DEL LIBRO (opcional)
+          color: "bg-rose-700",
+          icon: "📚",
+        },
+        {
+          day: 12,
+          type: "color",
+          content:
+            "Color del día: Blanco puro - Representa la paz, la pureza y nuevos comienzos ☁️: Siempre es válido volver a empezar",
+          hex: "#FFFFFF",
+          color: "bg-slate-200",
+          textColor: "text-black", // ⬅️ AGREGA ESTA LÍNEA
+          icon: "🎨",
+        },
+        {
+          day: 13,
+          type: "quote",
+          content:
+            '"No tengas miedo de cometer errores. Los errores son prueba de que lo estás intentando" - RM',
+          color: "bg-purple-600",
+          icon: "💜",
+        },
+        {
+          day: 14,
+          type: "song",
+          content: "everythingoes - RM",
+          link: "https://youtu.be/arXPrBQxOao?si=SUZ2UXuvud31XgNT", // ⬅️ CAMBIA ESTE ENLACE
+          color: "bg-blue-600",
+          icon: "🎵",
+        },
+        {
+          day: 15,
+          type: "photo",
+          content: "Otro YoonKook por aquí! 💜✨",
+          imageUrl: "assets/yoonkook2.jpg", // ⬅️ PON AQUÍ TU FOTO
+          color: "bg-purple-700",
+          icon: "✨",
+        },
+        {
+          day: 16,
+          type: "color",
+          content:
+            "Color del día: Vino tinto - Simboliza la pasión, la energía y los momentos especiales 🍷: Que hoy sea un buen día!",
+          hex: "#722F37",
+          color: "bg-red-900",
+          icon: "🎨",
+        },
+        {
+          day: 17,
+          type: "quote",
+          content:
+            '"Ámate a ti mismo primero y todo lo demás encajará" - Yoongi',
+          color: "bg-purple-600",
+          icon: "💜",
+        },
+        {
+          day: 18,
+          type: "song",
+          content: "Tokyo - RM",
+          link: "https://youtu.be/rT8dU6f4o5o?si=ban4sl0N0s2grljf", // ⬅️ CAMBIA ESTE ENLACE
+          color: "bg-blue-600",
+          icon: "🎵",
+        },
+        {
+          day: 19,
+          type: "book",
+          content:
+            '"El Extranjero" de Albert Camus - Recomendado por Namu. Sobre la existencia y encontrar significado, que la disfrutes!! 🌊',
+          link: "https://drive.google.com/file/d/19v1Ri5tqrIvnm-H5Sy-LhO0lJgN5XO7Q/view?usp=sharing", // ⬅️ ENLACE DEL LIBRO (opcional)
+          color: "bg-rose-700",
+          icon: "📚",
+        },
+        {
+          day: 20,
+          type: "quote",
+          content:
+            '"Como Yoon y Koo: diferentes pero perfectos juntos, no?" 🐱🐰',
+          color: "bg-purple-600",
+          icon: "💜",
+        },
+        {
+          day: 21,
+          type: "song",
+          content: "Una Playlist para ti - Ten un buen día! ",
+          link: "https://youtu.be/i0DCGOx13iM?si=6afGyZu-yzjUMYFv", // ⬅️ CAMBIA ESTE ENLACE
+          color: "bg-blue-600",
+          icon: "🎵",
+        },
+        {
+          day: 22,
+          type: "photo",
+          content:
+            "¡Koo Bonito! Ponte feliz, Koo, Namu y yo te queremos mucho ⭐🐰",
+          imageUrl: "assets/jungkook1.jpg", // ⬅️ PON AQUÍ TU FOTO
+          color: "bg-cyan-600",
+          icon: "✨",
+        },
+        {
+          day: 23,
+          type: "quote",
+          content:
+            '"Si no puedes volar, corre. Si no puedes correr, camina. Si no puedes caminar, gatea. Pero sigas lo que hagas, sigue avanzando" - Jimin',
+          color: "bg-purple-600",
+          icon: "💜",
+        },
+        {
+          day: 24,
+          type: "song",
+          content: "If You - Cover by Jk",
+          link: "https://youtu.be/_hzc0RVGQyQ?si=wjTytMg2GK80LwDl", // ⬅️ CAMBIA ESTE ENLACE
+          color: "bg-blue-600",
+          icon: "🎵",
+        },
+        {
+          day: 25,
+          type: "special",
+          content:
+            '¡Feliz Navidad Liss! 🎄✨ Sé mi Jungkook mucho tiempo más 🐱💜🐰. Como diría Jinnie: "Sé feliz, todos los días🤍".',
+          color: "bg-gradient-to-r from-purple-600 to-pink-600",
+          icon: "🎁",
+        },
+      ];
+
+      let openedGifts = [];
+
+      // Cargar regalos abiertos
+      function loadOpenedGifts() {
+        const saved = localStorage.getItem("adventCalendar_liss");
+        if (saved) {
+          openedGifts = JSON.parse(saved);
+        }
+      }
+
+      // Guardar regalos abiertos
+      function saveOpenedGifts() {
+        localStorage.setItem(
+          "adventCalendar_liss",
+          JSON.stringify(openedGifts)
+        );
+      }
+
+      // Crear calendario
+      function createCalendar() {
+        const calendar = document.getElementById("calendar");
+        calendar.innerHTML = "";
+        gifts.forEach((gift) => {
+          const isOpened = openedGifts.includes(gift.day);
+          const button = document.createElement("button");
+          button.className = `aspect-square rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl ${
+            isOpened
+              ? "bg-gradient-to-br from-purple-500 to-pink-500 animate-pulse"
+              : gift.color
+          } flex flex-col items-center justify-center text-white p-2 relative overflow-hidden`;
+
+          button.innerHTML = `
+                    <div class="absolute inset-0 bg-white opacity-0 hover:opacity-10 transition-opacity"></div>
+                    <div class="text-2xl md:text-3xl font-bold mb-1">${
+                      gift.day
+                    }</div>
+                    <div class="text-2xl ${isOpened ? "animate-bounce" : ""}">${
+            gift.icon
+          }</div>
+                    ${
+                      isOpened
+                        ? '<div class="absolute top-1 right-1 text-yellow-300">✨</div>'
+                        : ""
+                    }
+                `;
+
+          button.onclick = () => openGift(gift.day);
+          calendar.appendChild(button);
+        });
+      }
+
+      // Abrir regalo
+      function openGift(day) {
+        const today = new Date().getDate();
+        const currentMonth = new Date().getMonth();
+
+        if (currentMonth !== 11 || day > today) {
+          alert("¡Este regalo aún no está disponible! 🎁");
+          return;
+        }
+
+        if (!openedGifts.includes(day)) {
+          openedGifts.push(day);
+          saveOpenedGifts();
+          createCalendar();
+        }
+
+        showModal(gifts.find((g) => g.day === day));
+      }
+
+      // Mostrar modal
+      function showModal(gift) {
+        const modal = document.getElementById("modal");
+        const modalContent = document.getElementById("modalContent");
+        const modalContainer = modal.querySelector(".modal-content");
+
+        const textColorClass = gift.textColor || "text-white";
+        modalContainer.className = `modal-content ${gift.color} rounded-3xl shadow-2xl max-w-md w-full p-8 ${textColorClass} relative`;
+        let content = `
+                <div class="mb-4 text-6xl animate-bounce">${gift.icon}</div>
+                <h2 class="text-3xl font-bold mb-4">Día ${gift.day}</h2>
+                <div class="text-lg leading-relaxed mb-6">${gift.content}</div>
+            `;
+
+        if (gift.type === "color" && gift.hex) {
+          content += `
+                    <div class="flex items-center justify-center gap-3 mb-4">
+                        <div class="w-16 h-16 rounded-full border-4 border-white shadow-lg" style="background-color: ${gift.hex}"></div>
+                        <span class="font-mono text-sm">${gift.hex}</span>
+                    </div>
+                `;
+        }
+
+        // Botón para canciones y libros
+        if (
+          (gift.type === "song" || gift.type === "book") &&
+          gift.link &&
+          gift.link !== "TU_ENLACE_AQUI"
+        ) {
+          const buttonText =
+            gift.type === "song" ? "🎵 Escuchar en YouTube" : "📖 Leer libro";
+          content += `
+                    <a href="${gift.link}" target="_blank" rel="noopener noreferrer" 
+                       class="inline-block bg-white text-purple-600 px-6 py-3 rounded-full font-semibold hover:bg-purple-100 transition-colors">
+                        ${buttonText}
+                    </a>
+                `;
+        }
+
+        if (gift.type === "photo" && gift.imageUrl) {
+          content += `
+                    <div class="mb-4">
+                        <img src="${gift.imageUrl}" alt="Regalo especial" 
+                             class="rounded-2xl shadow-2xl max-h-80 mx-auto object-cover border-4 border-white"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <div style="display:none" class="text-4xl">🎁💜</div>
+                    </div>
+                `;
+        }
+
+        modalContent.innerHTML = content;
+        modal.classList.remove("hidden");
+      }
+
+      // Cerrar modal
+      function closeModal() {
+        document.getElementById("modal").classList.add("hidden");
+      }
+
+      // Cerrar modal al hacer clic fuera
+      document.getElementById("modal").addEventListener("click", function (e) {
+        if (e.target === this) closeModal();
+      });
+
+      // Inicializar
+      loadOpenedGifts();
+      createCalendar();
+    </script>
+  </body>
+</html>
