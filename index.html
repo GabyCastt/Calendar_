@@ -337,14 +337,6 @@
 
       // Abrir regalo
       function openGift(day) {
-        const today = new Date().getDate();
-        const currentMonth = new Date().getMonth();
-
-        if (currentMonth !== 11 || day > today) {
-          alert("¡Este regalo aún no está disponible! 🎁");
-          return;
-        }
-
         if (!openedGifts.includes(day)) {
           openedGifts.push(day);
           saveOpenedGifts();
